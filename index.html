@@ -110,9 +110,11 @@ button {
 
   <button id="yesBtn">Yes 💕</button>
  <button id="noBtn" onmouseover="no()" onclick="no()">No 💔</button>
+<p class="shy">“No” seems a bit shy 😈</p>
 
 
   <p id="response"></p>
+<h2 id="yay" style="display:none;">YAY! 🎉</h2>
 
   <img src="joy.jpg" class="photo" id="photo" />
 
@@ -139,6 +141,8 @@ let noSize = 1;
 document.getElementById("yesBtn").addEventListener("click", function() {
   const response = document.getElementById("response");
   const photo = document.getElementById("photo");
+  const yay = document.getElementById("yay");
+const yayGif = document.getElementById("yayGif");
   const giftBtn = document.getElementById("giftBtn");
   const music = document.getElementById("music");
 
