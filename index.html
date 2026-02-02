@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Be My Valentine?</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.container {
+  background: rgba(255,255,255,0.95);
+  padding: 25px;
+  border-radius: 20px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+h1 {
+  font-size: 26px;
+}
+
+button {
+  font-size: 18px;
+  padding: 12px 24px;
+  margin: 10px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+#yesBtn {
+  background: #ff4d6d;
+  color: white;
+}
+
+#noBtn {
+  background: #ccc;
+  position: absolute;
+}
+
+#response {
+  font-size: 18px;
+  margin-top: 15px;
+  color: #d6336c;
+}
+
+.photo {
+  width: 100%;
+  border-radius: 15px;
+  margin-top: 15px;
+  display: none;
+}
+
+.giftBtn {
+  display: none;
+  background: #ff85a2;
+  color: white;
+}
+
+.secret {
+  display: none;
+  margin-top: 15px;
+  font-size: 17px;
+}
+
+/* Hearts */
+.heart {
+  position: fixed;
+  bottom: -20px;
+  font-size: 24px;
+  animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-110vh); opacity: 0; }
+}
+
+/* Confetti */
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  animation: fall 4s linear infinite;
+}
+
+@keyframes fall {
+  from { transform: translateY(-10px); }
+  to { transform: translateY(110vh); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>Joy Wambui 💖<br>Will you be my Valentine?</h1>
+
+  <button id="yesBtn" onclick="yes()">Yes 💕</button>
+  <button id="noBtn" onmouseover="no()">No 💔</button>
+
+  <p id="response"></p>
+
+  <img src="joy.jpg" class="photo" id="photo" />
+
+  <button class="giftBtn" id="giftBtn" onclick="openGift()">Open Your Gift 🎁</button>
+
+  <div class="secret" id="secret">
+    💌 Joy,<br><br>
+    From the moment you came into my life, everything felt warmer and brighter.
+    Your smile, your laugh, and your heart mean more to me than I can ever explain.<br><br>
+    Choosing you is not something I think about, it is something I feel.
+    I hope this is the beginning of many memories, many laughs, and many Valentines together.<br><br>
+    ❤️ Always yours.
+  </div>
+</div>
+
+<audio id="music" loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+let noSize = 1;
+
+function yes() {
+  document.getElementById("response").innerHTML =
+    "YAY!! 💕 You make my world brighter every day.";
+  document.getElementById("music").play();
+  document.getElementById("photo").style.display = "block";
+  document.getElementById("giftBtn").style.display = "inline-block";
+  startHearts();
+  confetti();
+  if (navigator.vibrate) navigator.vibrate([200,100,200]);
+}
+
+function no() {
+  const btn = document.getElementById("noBtn");
+  const x = Math.random() * (window.innerWidth - 100);
+  const y = Math.random() * (window.innerHeight - 100);
+  noSize -= 0.05;
+  btn.style.transform = scale(${noSize});
+  btn.style.left = x + "px";
+  btn.style.top = y + "px";
+}
+
+function startHearts() {
+  setInterval(() => {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "❤️";
+    h.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 6000);
+  }, 400);
+}
+
+function confetti() {
+  for (let i = 0; i < 60; i++) {
+    const c = document.createElement("div");
+    c.className = "confetti";
+    c.style.left = Math.random() * 100 + "vw";
+    c.style.background = ["#ff4d6d","#ffd166","#06d6a0","#118ab2"][Math.floor(Math.random()*4)];
+    c.style.animationDuration = (3 + Math.random()*2) + "s";
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 5000);
+  }
+}
+
+function openGift() {
+  document.getElementById("secret").style.display = "block";
+}
+</script>
+
+</body>
+</html>
