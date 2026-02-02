@@ -108,7 +108,7 @@ button {
 <div class="container">
   <h1>Joy Wambui 💖<br>Will you be my Valentine?</h1>
 
-  <button id="yesBtn" onclick="yes()">Yes 💕</button>
+  <button id="yesBtn">Yes 💕</button>
   <button id="noBtn" onmouseover="no()">No 💔</button>
 
   <p id="response"></p>
@@ -132,13 +132,71 @@ button {
 </audio>
 
 <script>
-function yes() {
-  alert("Yes clicked!");
+let noSize = 1;
+
+// Attach the YES button click
+document.getElementById("yesBtn").addEventListener("click", function() {
+  const response = document.getElementById("response");
+  const photo = document.getElementById("photo");
+  const giftBtn = document.getElementById("giftBtn");
+  const music = document.getElementById("music");
+
+  response.innerHTML = "YAY!! 💕 You make my world brighter every day.";
+  photo.style.display = "block";
+  giftBtn.style.display = "inline-block";
+
+  // Play music safely
+  music.play().catch(err => {
+    console.log("Audio play prevented:", err);
+  });
+
+  startHearts();
+  startConfetti();
+
+  if (navigator.vibrate) navigator.vibrate([200,100,200]);
+});
+
+// NO button logic
+function no() {
+  const btn = document.getElementById("noBtn");
+  const x = Math.random() * (window.innerWidth - 100);
+  const y = Math.random() * (window.innerHeight - 100);
+  noSize -= 0.05;
+  btn.style.transform = scale(${noSize});
+  btn.style.left = x + "px";
+  btn.style.top = y + "px";
 }
 
-function no() {
-  alert("No hovered!");
+// Hearts animation
+function startHearts() {
+  setInterval(() => {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "❤️";
+    h.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 6000);
+  }, 400);
+}
+
+// Confetti animation
+function startConfetti() {
+  setInterval(() => {
+    const c = document.createElement("div");
+    c.className = "confetti";
+    c.style.left = Math.random() * 100 + "vw";
+    c.style.background = ["#ff4d6d","#ffd166","#06d6a0","#118ab2"][Math.floor(Math.random()*4)];
+    c.style.animationDuration = (3 + Math.random()*2) + "s";
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 5000);
+  }, 100);
+}
+
+// Gift click
+function openGift() {
+  document.getElementById("secret").style.display = "block";
 }
 </script>
+
 </body>
 </html>
