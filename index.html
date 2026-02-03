@@ -158,48 +158,36 @@ button {
 <script>
 let noSize = 1;
 
-// Attach the YES button click
-document.getElementById("yesBtn").addEventListener("click", function() {
-  const response = document.getElementById("response");
-  const photo = document.getElementById("photo");
-  const yay = document.getElementById("yay");
-const yayGif = document.getElementById("yayGif");
-  const giftBtn = document.getElementById("giftBtn");
+// YES button
+document.getElementById("yesBtn").addEventListener("click", function () {
+  document.getElementById("response").innerHTML =
+    "YAY!! 💕 You make my world brighter every day.";
+
+  document.getElementById("photo").style.display = "block";
+  document.getElementById("giftBtn").style.display = "inline-block";
+  document.getElementById("noBtn").style.display = "none";
+
   const music = document.getElementById("music");
-const yay = document.getElementById("yay");
-const yayGif = document.getElementById("yayGif");
-
-response.innerHTML = "YAY!! 💕 You make my world brighter every day.";
-photo.style.display = "block";
-giftBtn.style.display = "inline-block";
-yay.style.display = "block";
-yayGif.style.display = "block";
-
-document.getElementById("noBtn").style.display = "none";
-
-
-
-  // Play music safely
-  music.play().catch(err => {
-    console.log("Audio play prevented:", err);
-  });
-
-  startHearts();
-  startConfetti();
-
-  if (navigator.vibrate) navigator.vibrate([200,100,200]);
+  music.play().catch(() => {});
 });
 
-// NO button logic
+// NO button movement (WORKS ON LAPTOP + PHONE)
 function no() {
   const btn = document.getElementById("noBtn");
-  const x = Math.random() * (window.innerWidth - 100);
-  const y = Math.random() * (window.innerHeight - 100);
+
+  const x = Math.random() * (window.innerWidth - 120);
+  const y = Math.random() * (window.innerHeight - 120);
+
   noSize -= 0.05;
- btn.style.transform = `scale(${noSize})`;
+  if (noSize < 0.4) noSize = 0.4;
+
+  btn.style.position = "absolute";
   btn.style.left = x + "px";
   btn.style.top = y + "px";
+  btn.style.transform = `scale(${noSize})`;
 }
+</script>
+
 
 // Hearts animation
 function startHearts() {
