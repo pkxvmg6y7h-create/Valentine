@@ -23,8 +23,9 @@ body {
 }
 .yayGif {
   width: 100%;
-  border-radius: 15px;
-  margin-top: 15px;
+  max-width: 300px;
+  display: block;
+  margin: 15px auto;
 }
 
 .container {
@@ -119,7 +120,15 @@ button {
   <h1>Joy Wambui 💖<br>Will you be my Valentine?</h1>
 
   <button id="yesBtn">Yes 💕</button>
- <button id="noBtn" onmouseover="no()" onclick="no()">No 💔</button>
+ <button 
+  id="noBtn"
+  onmouseover="no()"
+  onclick="no()"
+  ontouchstart="no()"
+>
+  No 💔
+</button>
+
 <p class="shy">“No” seems a bit shy 😈</p>
 
 
@@ -157,12 +166,18 @@ document.getElementById("yesBtn").addEventListener("click", function() {
 const yayGif = document.getElementById("yayGif");
   const giftBtn = document.getElementById("giftBtn");
   const music = document.getElementById("music");
+const yay = document.getElementById("yay");
+const yayGif = document.getElementById("yayGif");
+
+response.innerHTML = "YAY!! 💕 You make my world brighter every day.";
+photo.style.display = "block";
+giftBtn.style.display = "inline-block";
 yay.style.display = "block";
 yayGif.style.display = "block";
 
-  response.innerHTML = "YAY!! 💕 You make my world brighter every day.";
-  photo.style.display = "block";
-  giftBtn.style.display = "inline-block";
+document.getElementById("noBtn").style.display = "none";
+
+
 
   // Play music safely
   music.play().catch(err => {
