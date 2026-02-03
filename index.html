@@ -16,6 +16,16 @@ body {
   height: 100vh;
   overflow: hidden;
 }
+.shy {
+  font-size: 13px;
+  color: #777;
+  margin-top: 5px;
+}
+.yayGif {
+  width: 100%;
+  border-radius: 15px;
+  margin-top: 15px;
+}
 
 .container {
   background: rgba(255,255,255,0.95);
@@ -116,6 +126,8 @@ button {
   <p id="response"></p>
 <h2 id="yay" style="display:none;">YAY! 🎉</h2>
 
+<img src="yay.gif" id="yayGif" class="yayGif" style="display:none;">
+
   <img src="joy.jpg" class="photo" id="photo" />
 
   <button class="giftBtn" id="giftBtn" onclick="openGift()">Open Your Gift 🎁</button>
@@ -145,6 +157,8 @@ document.getElementById("yesBtn").addEventListener("click", function() {
 const yayGif = document.getElementById("yayGif");
   const giftBtn = document.getElementById("giftBtn");
   const music = document.getElementById("music");
+yay.style.display = "block";
+yayGif.style.display = "block";
 
   response.innerHTML = "YAY!! 💕 You make my world brighter every day.";
   photo.style.display = "block";
