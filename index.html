@@ -117,19 +117,23 @@ button {
 <body>
 
 <div class="container">
+ <div id="question">
   <h1>Joy Wambui 💖<br>Will you be my Valentine?</h1>
 
   <button id="yesBtn">Yes 💕</button>
- <button 
-  id="noBtn"
-  onmouseover="no()"
-  onclick="no()"
-  ontouchstart="no()"
->
-  No 💔
-</button>
 
-<p class="shy">“No” seems a bit shy 😈</p>
+  <button 
+    id="noBtn"
+    onmouseover="no()"
+    onclick="no()"
+    ontouchstart="no()"
+  >
+    No 💔
+  </button>
+
+  <p class="shy">“No” seems a bit shy 😈</p>
+</div>
+
 
 
   <p id="response"></p>
@@ -160,16 +164,25 @@ let noSize = 1;
 
 // YES button
 document.getElementById("yesBtn").addEventListener("click", function () {
+  // hide the question section
+  document.getElementById("question").style.display = "none";
+
+  // show celebration content
   document.getElementById("response").innerHTML =
     "YAY!! 💕 You make my world brighter every day.";
 
+  document.getElementById("yay").style.display = "block";
+  document.getElementById("yayGif").style.display = "block";
   document.getElementById("photo").style.display = "block";
   document.getElementById("giftBtn").style.display = "inline-block";
-  document.getElementById("noBtn").style.display = "none";
+
+  startHearts();
+  startConfetti();
 
   const music = document.getElementById("music");
   music.play().catch(() => {});
 });
+
 
 // NO button movement (WORKS ON LAPTOP + PHONE)
 function no() {
