@@ -188,37 +188,37 @@ function no() {
 }
 </script>
 
+<script>
+  // Hearts animation function
+  function startHearts() {
+    setInterval(() => {
+      const h = document.createElement("div");
+      h.className = "heart";
+      h.innerHTML = "❤️";
+      h.style.left = Math.random() * 100 + "vw";
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 6000);
+    }, 400);
+  }
 
-// Hearts animation
-function startHearts() {
-  setInterval(() => {
-    const h = document.createElement("div");
-    h.className = "heart";
-    h.innerHTML = "❤️";
-    h.style.left = Math.random() * 100 + "vw";
-    document.body.appendChild(h);
-    setTimeout(() => h.remove(), 6000);
-  }, 400);
-}
+  // Confetti animation
+  function startConfetti() {
+    setInterval(() => {
+      const c = document.createElement("div");
+      c.className = "confetti";
+      c.style.left = Math.random() * 100 + "vw";
+      c.style.background =
+        ["#ff4d6d", "#ffd166", "#06d6a0", "#118ab2"][
+          Math.floor(Math.random() * 4)
+        ];
+      c.style.animationDuration = 3 + Math.random() * 2 + "s";
+      document.body.appendChild(c);
+      setTimeout(() => c.remove(), 5000);
+    }, 100);
+  }
 
-// Confetti animation
-function startConfetti() {
-  setInterval(() => {
-    const c = document.createElement("div");
-    c.className = "confetti";
-    c.style.left = Math.random() * 100 + "vw";
-    c.style.background = ["#ff4d6d","#ffd166","#06d6a0","#118ab2"][Math.floor(Math.random()*4)];
-    c.style.animationDuration = (3 + Math.random()*2) + "s";
-    document.body.appendChild(c);
-    setTimeout(() => c.remove(), 5000);
-  }, 100);
-}
-
-// Gift click
-function openGift() {
-  document.getElementById("secret").style.display = "block";
-}
+  function openGift() {
+    document.getElementById("secret").style.display = "block";
+  }
 </script>
 
-</body>
-</html>
