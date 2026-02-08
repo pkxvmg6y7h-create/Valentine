@@ -1,49 +1,36 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 <title>Be My Valentine?</title>
 
 <style>
-\ body {
+body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: linear-gradient(135deg, #ff9a9e, #fad0c4);
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   min-height: 100vh;
+  padding: 20px;
   overflow-y: auto;
-  padding: 20px 0;
-}
-
-.shy {
-  font-size: 13px;
-  color: #777;
-  margin-top: 5px;
-}
-.yayGif {
-  width: 100%;
-  max-width: 300px;
-  display: block;
-  margin: 15px auto;
 }
 
 .container {
   background: rgba(255,255,255,0.95);
-  padding: 25px;
+  padding: 20px;
   border-radius: 20px;
-  max-width: 400px;
+  max-width: 420px;
   width: 100%;
   text-align: center;
   box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-  max-height: 90vh;
-  overflow-y: auto;
 }
 
 h1 {
-  font-size: 26px;
+  font-size: 24px;
 }
 
 button {
@@ -65,10 +52,16 @@ button {
   position: absolute;
 }
 
-#response {
-  font-size: 18px;
-  margin-top: 15px;
-  color: #d6336c;
+.shy {
+  font-size: 13px;
+  color: #777;
+}
+
+.yayGif {
+  width: 100%;
+  max-width: 300px;
+  margin: 15px auto;
+  display: none;
 }
 
 .photo {
@@ -88,13 +81,14 @@ button {
   display: none;
   margin-top: 15px;
   font-size: 17px;
+  line-height: 1.5;
 }
 
 /* Hearts */
 .heart {
   position: fixed;
   bottom: -20px;
-  font-size: 24px;
+  font-size: 22px;
   animation: floatUp 6s linear infinite;
 }
 
@@ -121,57 +115,55 @@ button {
 <body>
 
 <div class="container">
- <div id="question">
-  <h1>Joy Wambui 💖<br>Will you be my Valentine?</h1>
+  <div id="question">
+    <h1>Joy Wambui 💖<br>Will you be my Valentine?</h1>
 
-  <button id="yesBtn">Yes 💕</button>
+    <button id="yesBtn">Yes 💕</button>
 
-  <button 
-    id="noBtn"
-    onmouseover="no()"
-    onclick="no()"
-    ontouchstart="no()"
-  >
-    No 💔
-  </button>
+    <button id="noBtn" onmouseover="no()" onclick="no()" ontouchstart="no()">
+      No 💔
+    </button>
 
-  <p class="shy">“No” seems a bit shy 😈</p>
-</div>
-
-
+    <p class="shy">“No” seems a bit shy 😈</p>
+  </div>
 
   <p id="response"></p>
-<h2 id="yay" style="display:none;">YAY! 🎉</h2>
+  <h2 id="yay" style="display:none;">YAY! 🎉</h2>
 
-<img src="yay.gif" id="yayGif" class="yayGif" style="display:none;">
-
-  <img src="joy.jpg" class="photo" id="photo" />
+  <img src="yay.gif" id="yayGif" class="yayGif">
+  <img src="joy.jpg" class="photo" id="photo">
 
   <button class="giftBtn" id="giftBtn" onclick="openGift()">Open Your Gift 🎁</button>
 
   <div class="secret" id="secret">
     💌 Joy,<br><br>
-    From the moment you came into my life, everything felt warmer and brighter.
+    From the moment you came into my life, everything felt warmer and brighter.  
     Your smile, your laugh, and your heart mean more to me than I can ever explain.<br><br>
-    Choosing you is not something I think about, it is something I feel.
+
+    Choosing you is not something I think about, it is something I feel.  
     I hope this is the beginning of many memories, many laughs, and many Valentines together.<br><br>
+
     ❤️ Always yours.
   </div>
-</div>
 
-<audio id="music" loop>
-  <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
-</audio>
+  <!-- Spotify Song -->
+  <div id="spotify" style="margin-top:15px; display:none;">
+    <iframe style="border-radius:12px"
+      src="https://open.spotify.com/embed/track/4I3KMa9p00MJwWbT0vi5iX"
+      width="100%" height="152" frameborder="0" allowfullscreen
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+    </iframe>
+  </div>
+
+</div>
 
 <script>
 let noSize = 1;
 
 // YES button
 document.getElementById("yesBtn").addEventListener("click", function () {
-  // hide the question section
   document.getElementById("question").style.display = "none";
 
-  // show celebration content
   document.getElementById("response").innerHTML =
     "YAY!! 💕 You make my world brighter every day.";
 
@@ -179,16 +171,13 @@ document.getElementById("yesBtn").addEventListener("click", function () {
   document.getElementById("yayGif").style.display = "block";
   document.getElementById("photo").style.display = "block";
   document.getElementById("giftBtn").style.display = "inline-block";
+  document.getElementById("spotify").style.display = "block";
 
   startHearts();
   startConfetti();
-
-  const music = document.getElementById("music");
-  music.play().catch(() => {});
 });
 
-
-// NO button movement (WORKS ON LAPTOP + PHONE)
+// NO button movement
 function no() {
   const btn = document.getElementById("noBtn");
 
@@ -198,44 +187,41 @@ function no() {
   noSize -= 0.05;
   if (noSize < 0.4) noSize = 0.4;
 
-  btn.style.position = "absolute";
   btn.style.left = x + "px";
   btn.style.top = y + "px";
   btn.style.transform = `scale(${noSize})`;
 }
+
+// Hearts
+function startHearts() {
+  setInterval(() => {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "❤️";
+    h.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 6000);
+  }, 400);
+}
+
+// Confetti
+function startConfetti() {
+  setInterval(() => {
+    const c = document.createElement("div");
+    c.className = "confetti";
+    c.style.left = Math.random() * 100 + "vw";
+    c.style.background =
+      ["#ff4d6d", "#ffd166", "#06d6a0", "#118ab2"][Math.floor(Math.random() * 4)];
+    c.style.animationDuration = 3 + Math.random() * 2 + "s";
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 5000);
+  }, 100);
+}
+
+function openGift() {
+  document.getElementById("secret").style.display = "block";
+}
 </script>
 
-<script>
-  // Hearts animation function
-  function startHearts() {
-    setInterval(() => {
-      const h = document.createElement("div");
-      h.className = "heart";
-      h.innerHTML = "❤️";
-      h.style.left = Math.random() * 100 + "vw";
-      document.body.appendChild(h);
-      setTimeout(() => h.remove(), 6000);
-    }, 400);
-  }
-
-  // Confetti animation
-  function startConfetti() {
-    setInterval(() => {
-      const c = document.createElement("div");
-      c.className = "confetti";
-      c.style.left = Math.random() * 100 + "vw";
-      c.style.background =
-        ["#ff4d6d", "#ffd166", "#06d6a0", "#118ab2"][
-          Math.floor(Math.random() * 4)
-        ];
-      c.style.animationDuration = 3 + Math.random() * 2 + "s";
-      document.body.appendChild(c);
-      setTimeout(() => c.remove(), 5000);
-    }, 100);
-  }
-
-  function openGift() {
-    document.getElementById("secret").style.display = "block";
-  }
-</script>
-
+</body>
+</html>
